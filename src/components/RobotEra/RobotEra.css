@@ -1,0 +1,21 @@
+.robotera {
+    background-image: url(../../images/robotera-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+}
+.robotera-text p {
+    font-size: 26px;
+}
+.robotera-text ul {
+    margin: 0;
+    padding: 0;
+}
+.robotera-text ul li {
+    list-style: none;
+    font-size: 26px;
+    margin: 10px 0;
+}
+.robotera-text ul li span {
+    color: #6481ad;
+}

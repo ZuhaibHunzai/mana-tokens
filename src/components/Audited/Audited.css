@@ -1,0 +1,32 @@
+.audited-area {
+    padding: 6.25rem 0;
+    background-image: url(../../images//audited-bg.jpg);
+    background-size: cover;
+    background-position: center bottom;
+}
+.audited-image {
+    text-align: center;
+}
+.audited-image img {
+    width: 90%;
+}
+.audited-text {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.audited-text p {
+    font-size: 1.75rem;
+}
+
+@media (max-width: 991px) {
+    .audited-area {
+        padding: 4.25rem 0;
+    }
+    .audited-image img {
+        margin: 1.8rem 0;
+    }
+    .audited-text p {
+        font-size: 1.4rem;
+    }
+}

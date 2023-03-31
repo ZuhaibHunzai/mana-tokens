@@ -1,0 +1,7 @@
+.system-area {
+    padding: 120px 0;
+    text-align: center;
+    background-image: url(../../images/system-bg.jpg);
+    background-size: cover;
+    background-position: center;
+}

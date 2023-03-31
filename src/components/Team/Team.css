@@ -1,0 +1,42 @@
+.team-area {
+    padding: 100px 0;
+    background-image: url(../../images/team-bg.jpg);
+    background-size: cover;
+    background-position: center bottom;
+}
+.team-member {
+    margin-top: 100px;
+}
+.single-member {
+    padding: 0 20px;
+}
+.single-member img {
+    width: 100%;
+    border: 1px solid #40496f;
+}
+.team-text {
+    text-align: center;
+    padding: 10px;
+}
+
+.team-text a {
+    color: #007dfd;
+}
+.team-text span {
+    display: inline-block;
+    width: 100%;
+    height: 1px;
+    background-color: #40496f;
+    margin-bottom: 10px;
+}
+
+.powered-area {
+    padding-top: 100px;
+}
+.single-powered {
+    padding: 30px;
+    text-align: center;
+}
+.single-powered img {
+    height: 55px;
+}

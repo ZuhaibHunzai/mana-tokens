@@ -1,0 +1,44 @@
+.header-area .navbar {
+  background-color: rgba(4, 5, 8, 0.8);
+  padding: 10px 0;
+}
+
+.header-area a.nav-link {
+  padding: 8px 20px !important;
+  display: inline-block;
+  color: #b9b9b9;
+  border-radius: 8px;
+}
+.header-area a.nav-link:hover {
+  background-color: #2b2c36;
+}
+.header-area a.nav-link img {
+  height: 18px;
+}
+.wallet-btn {
+  color: #fff;
+}
+.header-area .ms-auto .other-link a.nav-link {
+  color: #fff;
+  background-color: #2b2c36;
+  padding: 8px 25px !important;
+  border-radius: 8px;
+  margin-left: 20px !important;
+}
+@media (max-width: 991px) {
+  .header-area a.nav-link {
+    text-align: center;
+    padding: 15px 20px !important;
+  }
+  .header-area .ms-auto .other-link a.nav-link {
+    margin-left: 0 !important;
+    width: 100%;
+  }
+  .social-link {
+    text-align: center;
+    margin: 10px 0;
+  }
+  .header-area .me-auto {
+    margin-top: 10px;
+  }
+}

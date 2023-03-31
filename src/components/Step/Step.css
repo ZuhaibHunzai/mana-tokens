@@ -1,0 +1,13 @@
+.single-step h2 {
+    font-size: 55px;
+    margin-bottom: 30px;
+}
+.single-step p {
+    font-size: 22px;
+}
+
+@media (max-width: 991px) {
+    .step-image img {
+        margin-top: 30px;
+    }
+}
