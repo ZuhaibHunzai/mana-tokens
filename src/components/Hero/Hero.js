@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
@@ -12,6 +12,13 @@ import { ethers } from "ethers";
 const Hero = () => {
   const { walletConnect } = useWeb3Functions();
   const { isWalletConnected, account, signer } = WalletConsumer();
+  const [tokens, setTokens] = useState(0);
+
+  const getNumberOfTokens = (event) => {
+    const inputText = event.target.value;
+    const tokens = inputText;
+    setTokens(tokens * 0.02);
+  };
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -21,6 +28,7 @@ const Hero = () => {
       const tx = await contractInstance.buy(account, {
         value: ethers.utils.parseEther(buy),
       });
+
       await tx.wait();
     } catch (err) {
       console.log(err);
@@ -86,6 +94,7 @@ const Hero = () => {
                   </div>
                   <p>Sold — 44,417,425 / 90,000,000</p>
                   <p>Raised — $888,348 / $1,800,000</p>
+                  <p>You will get {tokens} </p>
                   <form onSubmit={onSubmit}>
                     <input
                       className="buy-input"
@@ -93,6 +102,7 @@ const Hero = () => {
                       name="buy"
                       placeholder="Enter amount to buy mana tokens"
                       required
+                      onChange={getNumberOfTokens}
                     />
                     <button className="buy-btn" type="submit">
                       Buy

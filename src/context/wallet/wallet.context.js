@@ -5,6 +5,8 @@ const initialState = {
   isWalletConnected: false,
   ethersProvider: null,
   account: null,
+  web3Modal: null,
+  provider: null,
 };
 const WalletContext = createContext(initialState);
 

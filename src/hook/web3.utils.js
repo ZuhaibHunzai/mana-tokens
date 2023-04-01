@@ -20,3 +20,34 @@ export const useCheckWalletConnection = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
+
+/*** @dev it will listen to provder events and update the states.
+ * @returns void
+ */
+export const useOnProviderChange = () => {
+  const { provider, dispatch } = WalletConsumer();
+  const { getNetworkInfo, updateSinger } = useWeb3Functions();
+  useLayoutEffect(() => {
+    provider &&
+      (() => {
+        // Subscribe to accounts change
+        provider.on("accountsChanged", (accounts) => {
+          if (accounts && accounts.length)
+            return dispatch({
+              account: accounts[0],
+              isWalletConnected: true,
+            });
+          dispatch({
+            account: null,
+            isWalletConnected: false,
+          });
+        });
+        // Subscribe to chainId change
+        provider.on("chainChanged", () => {
+          getNetworkInfo(provider);
+          updateSinger();
+        });
+      })();
+    // eslint-disable-next-line
+  }, [provider]);
+};

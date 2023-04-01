@@ -10,10 +10,14 @@ import Steps from "./components/Steps/Steps";
 import System from "./components/System/System";
 import Team from "./components/Team/Team";
 import Whitepaper from "./components/Whitepaper/Whitepaper";
-import { useCheckWalletConnection } from "./hook/web3.utils";
+import {
+  useCheckWalletConnection,
+  useOnProviderChange,
+} from "./hook/web3.utils";
 
 function App() {
   useCheckWalletConnection();
+  useOnProviderChange();
   return (
     <div className="App">
       <Header />

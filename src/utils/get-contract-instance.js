@@ -3,7 +3,7 @@ import abi from "../assests/abi.json";
 
 export const getContractInstance = (signer) => {
   return new ethers.Contract(
-    "0x89EC6B92095957601Babba36Cc3eDee7f62a4958",
+    "0x70ecea464410bad364c4eb90f75d1d51a2ab03bc",
     abi,
     signer
   );
