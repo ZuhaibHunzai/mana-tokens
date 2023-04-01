@@ -62,7 +62,7 @@ const Header = () => {
                   {!isWalletConnected && (
                     <>
                       <div className="other-link">
-                        <Nav.Link onClick={walletConnect}>CONNECTt</Nav.Link>
+                        <Nav.Link onClick={walletConnect}>CONNECT</Nav.Link>
                       </div>
                     </>
                   )}

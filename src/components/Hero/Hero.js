@@ -16,8 +16,10 @@ const Hero = () => {
 
   const getNumberOfTokens = (event) => {
     const inputText = event.target.value;
-    const tokens = inputText;
-    setTokens(tokens * 0.02);
+    let oneToken = 0.02;
+
+    const tokens = inputText * oneToken;
+    setTokens(tokens);
   };
   const onSubmit = async (event) => {
     event.preventDefault();
