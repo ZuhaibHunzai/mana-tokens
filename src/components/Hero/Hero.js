@@ -130,6 +130,7 @@ const Hero = () => {
                       placeholder="Enter amount to buy mana tokens"
                       required
                       onChange={getNumberOfTokens}
+                      step="any"
                     />
                     <button className="buy-btn" type="submit">
                       Buy
