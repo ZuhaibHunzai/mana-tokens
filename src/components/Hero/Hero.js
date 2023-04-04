@@ -8,6 +8,7 @@ import { useWeb3Functions } from "../../hook/web3.functions";
 import { WalletConsumer } from "../../context/wallet/wallet.context";
 import { getContractInstance } from "../../utils/get-contract-instance";
 import { ethers } from "ethers";
+import { getReferralFromURL } from "../../hook/web3.utils";
 
 const Hero = () => {
   const { walletConnect } = useWeb3Functions();
@@ -27,7 +28,10 @@ const Hero = () => {
       const data = new FormData(event.target);
       const buy = data.get("buy");
       const contractInstance = getContractInstance(signer);
-      const tx = await contractInstance.buy(account, {
+
+      const referral = getReferralFromURL() || account;
+      console.log(referral, "ref");
+      const tx = await contractInstance.buy(referral, {
         value: ethers.utils.parseEther(buy),
       });
 
@@ -35,6 +39,18 @@ const Hero = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const onCopyLink = () => {
+    const link = window.location.href + `?referral=${account}`;
+    navigator.clipboard.writeText(link).then(
+      function () {
+        console.log(link, "success");
+      },
+      function (err) {
+        console.error("Async: Could not copy text: ", err);
+      }
+    );
   };
 
   return (
@@ -96,7 +112,16 @@ const Hero = () => {
                   </div>
                   <p>Sold — 44,417,425 / 90,000,000</p>
                   <p>Raised — $888,348 / $1,800,000</p>
-                  <p>You will get {tokens} </p>
+                  <div className="referral">
+                    <div>
+                      <p>You will get {tokens} </p>
+                    </div>
+                    <div>
+                      <button className="referral-btn" onClick={onCopyLink}>
+                        Copy Referall
+                      </button>
+                    </div>
+                  </div>
                   <form onSubmit={onSubmit}>
                     <input
                       className="buy-input"

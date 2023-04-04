@@ -51,3 +51,8 @@ export const useOnProviderChange = () => {
     // eslint-disable-next-line
   }, [provider]);
 };
+
+export const getReferralFromURL = () => {
+  const params = new URL(document.location).searchParams;
+  return params.get("referral");
+};
