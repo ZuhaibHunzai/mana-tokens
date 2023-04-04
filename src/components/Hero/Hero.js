@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
-import "./Hero.css";
 import NavLink from "react-bootstrap/esm/NavLink";
 import { useWeb3Functions } from "../../hook/web3.functions";
 import { WalletConsumer } from "../../context/wallet/wallet.context";
 import { getContractInstance } from "../../utils/get-contract-instance";
 import { ethers } from "ethers";
 import { getReferralFromURL } from "../../hook/web3.utils";
+import "./Hero.css";
 
 const Hero = () => {
   const { walletConnect } = useWeb3Functions();
@@ -24,7 +24,9 @@ const Hero = () => {
         const price = await getExchangeRate.exchangeRate();
         const exchangeRate = ethers.utils.formatEther(price);
         setExchangeRate(exchangeRate);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     if (account && isCorrectChain) {
@@ -42,9 +44,7 @@ const Hero = () => {
       const data = new FormData(event.target);
       const buy = data.get("buy");
       const contractInstance = getContractInstance(signer);
-
       const referral = getReferralFromURL() || account;
-      console.log(referral, "ref");
       const tx = await contractInstance.buy(referral, {
         value: ethers.utils.parseEther(buy),
       });
@@ -128,7 +128,9 @@ const Hero = () => {
                   <p>Raised — $888,348 / $1,800,000</p>
                   <div className="referral">
                     <div>
-                      <p>You will get {tokens} TARO</p>
+                      <p className="exchange-text">
+                        You will get {tokens} TARO
+                      </p>
                     </div>
                     <div>
                       <button className="referral-btn" onClick={onCopyLink}>

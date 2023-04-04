@@ -134,12 +134,20 @@
   background-color: #1872fa;
   text-transform: uppercase;
 }
+
 .referral {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  text-align: center;
+}
+.exchange-text {
+  display: flex;
+  text-align: center;
+  padding-top: 12px;
 }
 .referral-btn {
+  display: flex;
   border: none;
   background-color: #ffe506;
   padding: 5px 12px;
