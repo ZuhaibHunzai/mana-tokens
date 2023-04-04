@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
@@ -12,16 +12,30 @@ import { getReferralFromURL } from "../../hook/web3.utils";
 
 const Hero = () => {
   const { walletConnect } = useWeb3Functions();
-  const { isWalletConnected, account, signer } = WalletConsumer();
+  const { isWalletConnected, account, signer, ethersProvider, isCorrectChain } =
+    WalletConsumer();
+  const [exchangeRate, setExchangeRate] = useState(0);
   const [tokens, setTokens] = useState(0);
 
-  const getNumberOfTokens = (event) => {
-    const inputText = event.target.value;
-    let oneToken = 0.02;
+  useEffect(() => {
+    const getNumberOfTokens = async () => {
+      try {
+        const getExchangeRate = getContractInstance(ethersProvider);
+        const price = await getExchangeRate.exchangeRate();
+        const exchangeRate = ethers.utils.formatEther(price);
+        setExchangeRate(exchangeRate);
+      } catch (err) {}
+    };
 
-    const tokens = inputText * oneToken;
-    setTokens(tokens);
+    if (account && isCorrectChain) {
+      getNumberOfTokens();
+    }
+  }, [account, isCorrectChain, ethersProvider]);
+  const onChange = (event) => {
+    const value = event.target.value;
+    setTokens(value * exchangeRate);
   };
+
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -114,7 +128,7 @@ const Hero = () => {
                   <p>Raised — $888,348 / $1,800,000</p>
                   <div className="referral">
                     <div>
-                      <p>You will get {tokens} </p>
+                      <p>You will get {tokens} TARO</p>
                     </div>
                     <div>
                       <button className="referral-btn" onClick={onCopyLink}>
@@ -129,7 +143,7 @@ const Hero = () => {
                       name="buy"
                       placeholder="Enter amount to buy mana tokens"
                       required
-                      onChange={getNumberOfTokens}
+                      onChange={onChange}
                       step="any"
                     />
                     <button className="buy-btn" type="submit">

@@ -7,6 +7,7 @@ const initialState = {
   account: null,
   web3Modal: null,
   provider: null,
+  isCorrectChain: false,
 };
 const WalletContext = createContext(initialState);
 
