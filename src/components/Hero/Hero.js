@@ -9,6 +9,7 @@ import { getContractInstance } from "../../utils/get-contract-instance";
 import { ethers } from "ethers";
 import { getReferralFromURL } from "../../hook/web3.utils";
 import "./Hero.css";
+import { getErc20ContractInstance } from "../../utils/get-ERC20-instance";
 
 const Hero = () => {
   const { walletConnect } = useWeb3Functions();
@@ -17,6 +18,7 @@ const Hero = () => {
   const [exchangeRate, setExchangeRate] = useState(0);
   const [tokens, setTokens] = useState(0);
   const [raised, setRaised] = useState(0);
+  const [totalSupply, setTotalSupply] = useState(0);
 
   useEffect(() => {
     getValues();
@@ -50,6 +52,20 @@ const Hero = () => {
       console.log(err, "error");
     }
   };
+
+  const getTotalSupply = async () => {
+    try {
+      const erc20Instance = getErc20ContractInstance();
+      const supply = await erc20Instance.totalSupply();
+      const totalSupplyTokens = ethers.utils.formatEther(supply);
+      setTotalSupply(totalSupplyTokens);
+      console.log(totalSupply);
+    } catch (err) {
+      console.log(err, "error");
+    }
+  };
+  getTotalSupply();
+
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -115,7 +131,7 @@ const Hero = () => {
                   <div className="new-progress-bar">
                     <span className="w50"></span>
                   </div>
-                  <p>Sold — 44,417,425 / 90,000,000</p>
+                  <p>Sold — 44,417,425 / {totalSupply}</p>
                   <p>Raised — Matic {raised} / Matic 1,800,000</p>
                   <p>You own — 0 TARO</p>
                   <NavLink href="#link" onClick={walletConnect}>
@@ -136,8 +152,8 @@ const Hero = () => {
                   <div className="new-progress-bar">
                     <span className="w50"></span>
                   </div>
-                  <p>Sold — 44,417,425 / 90,000,000</p>
-                  <p>Raised — Matic {raised} / MAtic 1,800,000</p>
+                  <p>Sold — 44,417,425 / {{ totalSupply }}</p>
+                  <p>Raised — Matic {raised} / Matic 1,800,000</p>
                   <div className="referral">
                     <div>
                       <p className="exchange-text">
