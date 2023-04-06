@@ -16,8 +16,10 @@ const Hero = () => {
     WalletConsumer();
   const [exchangeRate, setExchangeRate] = useState(0);
   const [tokens, setTokens] = useState(0);
+  const [raised, setRaised] = useState(0);
 
   useEffect(() => {
+    getValues();
     const getNumberOfTokens = async () => {
       try {
         const getExchangeRate = getContractInstance(ethersProvider);
@@ -38,6 +40,16 @@ const Hero = () => {
     setTokens(value * exchangeRate);
   };
 
+  const getValues = async () => {
+    try {
+      const instance = getContractInstance();
+      const value = await instance.weiRaised();
+      const raised = ethers.utils.formatEther(value);
+      setRaised(raised);
+    } catch (err) {
+      console.log(err, "error");
+    }
+  };
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -104,7 +116,7 @@ const Hero = () => {
                     <span className="w50"></span>
                   </div>
                   <p>Sold — 44,417,425 / 90,000,000</p>
-                  <p>Raised — $888,348 / $1,800,000</p>
+                  <p>Raised — Matic {raised} / Matic 1,800,000</p>
                   <p>You own — 0 TARO</p>
                   <NavLink href="#link" onClick={walletConnect}>
                     CONNECT WALLET
@@ -125,7 +137,7 @@ const Hero = () => {
                     <span className="w50"></span>
                   </div>
                   <p>Sold — 44,417,425 / 90,000,000</p>
-                  <p>Raised — $888,348 / $1,800,000</p>
+                  <p>Raised — Matic {raised} / MAtic 1,800,000</p>
                   <div className="referral">
                     <div>
                       <p className="exchange-text">
